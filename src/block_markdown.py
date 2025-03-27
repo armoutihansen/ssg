@@ -1,6 +1,5 @@
-import re
 from enum import Enum
-from htmlnode import HTMLNode, ParentNode
+from htmlnode import ParentNode
 from textnode import text_node_to_html_node, TextNode, TextType
 from inline_markdown import text_to_textnodes
 
@@ -49,28 +48,8 @@ def block_to_block_type(block):
         return BlockType.OLIST
     return BlockType.PARAGRAPH
 
-# def block_to_block_type(markdown: str) -> BlockType:
-#     if re.match(r'\#{1,6}\s', markdown):
-#         return BlockType.HEADING
-#     if re.match(r'```', markdown):
-#         return BlockType.CODE
     
-#     lst = markdown.split("\n")
-#     check_quote = [True if line[0] ==">" else False for line in lst]
-#     if all(check_quote):
-#         return BlockType.QUOTE
-    
-#     check_unordered_list = [True if re.match(r'-\s', line) else False for line in lst]
-#     if all(check_unordered_list):
-#         return BlockType.ULIST
-    
-#     check_ordered_list = [True if re.match(r'\d.\s', line) else False for line in lst]
-#     if all(check_ordered_list):
-#         return BlockType.OLIST
-    
-#     return BlockType.PARAGRAPH
-    
-def markdown_to_html_node(markdown: str) -> HTMLNode:
+def markdown_to_html_node(markdown: str) -> ParentNode:
     blocks = markdown_to_blocks(markdown)
     children = []
     for block in blocks:
