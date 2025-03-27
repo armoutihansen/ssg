@@ -1,3 +1,3 @@
 # SSG
 
-A _S_imple _S_tatic _S_ite generator written in Python.
+A **S**imple **S**tatic **S**ite generator written in Python.
