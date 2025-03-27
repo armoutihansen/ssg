@@ -2,7 +2,7 @@ from block_markdown import markdown_to_html_node
 from extract_title import extract_title
 import os
 
-def generate_page_recursive(from_path, template_path, dest_path):
+def generate_page_recursive(from_path, template_path, dest_path, BASEPATH):
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
 
     if not os.path.exists(from_path):
@@ -35,10 +35,12 @@ def generate_page_recursive(from_path, template_path, dest_path):
             title = extract_title(md)
             
             content = template.replace("{{ Title }}", title).replace("{{ Content }}", md_to_html)
+            content = content.replace('href="/', 'href="'+BASEPATH)
+            content = content.replace('src="/', 'src="'+BASEPATH)
             
             with open(dest_path_, "w") as file:
                 file.write(content)
                 
         else:
-            generate_page_recursive(from_path_, template_path, dest_path_)
+            generate_page_recursive(from_path_, template_path, dest_path_, BASEPATH)
                     
